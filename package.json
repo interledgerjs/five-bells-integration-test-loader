@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Intelligent dependency loader for integration tests",
   "main": "index.js",
+  "bin": {
+    "integration-loader": "src/bin/integration-loader"
+  },
   "scripts": {
     "lint": "eslint .",
     "test": "echo \"Error: no test specified\""
@@ -31,5 +34,12 @@
     "eslint-config-standard": "^6.2.1",
     "eslint-plugin-promise": "^3.3.1",
     "eslint-plugin-standard": "^2.0.1"
+  },
+  "dependencies": {
+    "bluebird": "^3.4.6",
+    "bluebird-co": "^2.2.0",
+    "child-process-promise": "^2.2.0",
+    "git-branch": "^0.3.0",
+    "node-fetch": "^1.6.3"
   }
 }

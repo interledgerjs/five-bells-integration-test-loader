@@ -1,0 +1,20 @@
+#!/usr/bin/env node
+'use strict'
+
+const path = require('path')
+const spawn = require('child-process-promise').spawn
+
+const packageJson = require(path.resolve(process.cwd(), 'package.json'))
+const loaderConfig = packageJson.config['five-bells-integration-test-loader']
+
+const Promise = require('bluebird-co')
+const DependencyManager = require('../lib/dependency-manager').DependencyManager
+const dependencies = new DependencyManager({ defaultDependencies: {
+  [loaderConfig.module]: loaderConfig.repo
+} })
+
+Promise.coroutine(function * () {
+  const isBranch = yield dependencies.checkForBranchOnDependency(loaderConfig.module)
+  const branch = isBranch ? dependencies.getBranchNameUnderTest() : 'master'
+  yield spawn('npm', ['install', loaderConfig.repo + '#' + branch], { stdio: 'inherit' })
+})().done()

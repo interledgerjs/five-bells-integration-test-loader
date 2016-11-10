@@ -37,7 +37,10 @@ And it needs to specify which integration test module to use in its `package.jso
   "name": "foo",
   "version": "1.0.0",
   "config": {
-    "integration-test-loader": "five-bells-integration-test"
+    "integration-test-loader": {
+      "module": "five-bells-integration-test",
+      "repo": "interledgerjs/five-bells-integration-test"
+    }
   }
 }
 ```
