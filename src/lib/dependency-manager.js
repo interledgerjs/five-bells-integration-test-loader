@@ -56,7 +56,7 @@ class DependencyManager {
    */
   checkForBranchOnDependency (dependency) {
     const branch = this.getBranchNameUnderTest()
-    if (!branch) return false
+    if (!branch) return Promise.resolve(false)
     const repo = this.defaultDependencies[dependency]
     const url = `https://github.com/${repo}/tree/${branch}`
     return fetch(url).then((response) => response.status === 200)
