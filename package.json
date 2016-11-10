@@ -1,6 +1,6 @@
 {
   "name": "five-bells-integration-test-loader",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Intelligent dependency loader for integration tests",
   "main": "index.js",
   "bin": {
