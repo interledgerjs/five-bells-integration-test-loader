@@ -1,0 +1,28 @@
+{
+  "name": "five-bells-integration-test-loader",
+  "version": "1.0.0",
+  "description": "Intelligent dependency loader for integration tests",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/interledgerjs/five-bells-integration-test-loader.git"
+  },
+  "keywords": [
+    "five-bells",
+    "ilp",
+    "interledger",
+    "dependency",
+    "integration",
+    "test",
+    "loader"
+  ],
+  "author": "Interledger.js Team <info@interledgerjs.org>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/interledgerjs/five-bells-integration-test-loader/issues"
+  },
+  "homepage": "https://github.com/interledgerjs/five-bells-integration-test-loader#readme"
+}
