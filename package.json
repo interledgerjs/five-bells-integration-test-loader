@@ -40,6 +40,7 @@
     "bluebird-co": "^2.2.0",
     "child-process-promise": "^2.2.0",
     "git-branch": "^0.3.0",
-    "node-fetch": "^1.6.3"
+    "node-fetch": "^1.6.3",
+    "rimraf": "^2.5.4"
   }
 }
