@@ -6,6 +6,7 @@ const path = require('path')
 const fetch = require('node-fetch')
 const gitBranch = require('git-branch')
 const spawn = require('child-process-promise').spawn
+const rimraf = require('rimraf')
 
 class DependencyManager {
   constructor ({ defaultDependencies }) {
@@ -161,6 +162,12 @@ class DependencyManager {
     yield spawn('npm', ['link'], {stdio: 'inherit'})
     process.chdir(this.testDir)
     yield spawn('npm', ['link', 'ilp-kit'], {stdio: 'inherit'})
+
+    // Avoid that old versions of modules listed in this.defaultDependencies are used instead of the latest version
+    // see https://github.com/interledgerjs/five-bells-integration-test/pull/58#issuecomment-274904951
+    for (const depName in this.defaultDependencies) {
+      rimraf.sync('node_modules/**/node_modules/' + depName)
+    }
   }
 }
 
