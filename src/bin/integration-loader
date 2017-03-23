@@ -9,12 +9,17 @@ const loaderConfig = packageJson.config['five-bells-integration-test-loader']
 
 const Promise = require('bluebird-co')
 const DependencyManager = require('../lib/dependency-manager').DependencyManager
-const dependencies = new DependencyManager({ defaultDependencies: {
-  [loaderConfig.module]: loaderConfig.repo
-} })
+const defaultDeps = { [loaderConfig.module]: loaderConfig.repo }
+if (loaderConfig.module === 'five-bells-integration-test') {
+  defaultDeps['five-bells-service-manager'] = 'interledgerjs/five-bells-service-manager'
+}
+const dependencies = new DependencyManager({ defaultDependencies: defaultDeps })
 
 Promise.coroutine(function * () {
-  const isBranch = yield dependencies.checkForBranchOnDependency(loaderConfig.module)
-  const branch = isBranch ? dependencies.getBranchNameUnderTest() : 'master'
-  yield spawn('npm', ['install', loaderConfig.repo + '#' + branch], { stdio: 'inherit' })
+  for (const module in dependencies.defaultDependencies) {
+    const isBranch = yield dependencies.checkForBranchOnDependency(module)
+    const branch = isBranch ? dependencies.getBranchNameUnderTest() : 'master'
+    const repo = dependencies.defaultDependencies[module]
+    yield spawn('npm', ['install', repo + '#' + branch], { stdio: 'inherit' })
+  }
 })().done()
