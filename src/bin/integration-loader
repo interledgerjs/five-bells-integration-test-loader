@@ -17,9 +17,11 @@ const dependencies = new DependencyManager({ defaultDependencies: defaultDeps })
 
 Promise.coroutine(function * () {
   for (const module in dependencies.defaultDependencies) {
-    const isBranch = yield dependencies.checkForBranchOnDependency(module)
-    const branch = isBranch ? dependencies.getBranchNameUnderTest() : 'master'
-    const repo = dependencies.defaultDependencies[module]
-    yield spawn('npm', ['install', repo + '#' + branch], { stdio: 'inherit' })
+    if (module !== dependencies.getHostModuleName()) {
+      const isBranch = yield dependencies.checkForBranchOnDependency(module)
+      const branch = isBranch ? dependencies.getBranchNameUnderTest() : 'master'
+      const repo = dependencies.defaultDependencies[module]
+      yield spawn('npm', ['install', repo + '#' + branch], { stdio: 'inherit' })
+    }
   }
 })().done()
