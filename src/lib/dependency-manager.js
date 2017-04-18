@@ -164,6 +164,7 @@ class DependencyManager {
     yield spawn('git', ['clone', repoUrl, '-b', branch, targetDir], {stdio: 'inherit'})
 
     process.chdir(targetDir)
+    yield spawn('ln', ['-s', '../node_modules', '.'], {stdio: 'inherit'})
     yield spawn('npm', ['install'], {stdio: 'inherit'})
     yield spawn('npm', ['link'], {stdio: 'inherit'})
     process.chdir(this.testDir)
