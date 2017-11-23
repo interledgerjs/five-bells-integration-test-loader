@@ -1,10 +1,11 @@
 machine:
   node:
-    version: 6.9.1
+    version: 7.7.1
 test:
   override:
     - npm run lint
     - if git log -1 --pretty=%B | grep -qF "[skip tests]"; then true; else npm test; fi
+    - if git log -1 --pretty=%B | grep -qF "[skip tests]"; then true; else npm run integration; fi
 deployment:
   production:
     branch: master

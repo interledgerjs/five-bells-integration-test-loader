@@ -8,6 +8,7 @@
   },
   "scripts": {
     "lint": "eslint .",
+    "integration": "node src/bin/integration-loader && rm -rf node_modules/five-bells-integration-test-loader && ln -s .. node_modules/five-bells-integration-test-loader && integration all",
     "test": "echo \"Error: no test specified\""
   },
   "repository": {
@@ -42,5 +43,11 @@
     "git-branch": "^0.3.0",
     "node-fetch": "^1.6.3",
     "rimraf": "^2.5.4"
+  },
+  "config": {
+    "five-bells-integration-test-loader": {
+      "module": "five-bells-integration-test",
+      "repo": "interledgerjs/five-bells-integration-test"
+    }
   }
 }
