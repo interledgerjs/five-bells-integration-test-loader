@@ -97,14 +97,14 @@ class DependencyManager {
    * This method will prepare a directory for the integration test by first
    * generating a package.json and then running the npm installation routine.
    */
-  * install () {
+  async install () {
     // Prepare test directory
-    yield spawn('rm', ['-rf', this.testDir])
+    await spawn('rm', ['-rf', this.testDir])
     fs.mkdirSync(this.testDir)
     process.chdir(this.testDir)
 
     // Calculate dependency overrides based on git branches with same name
-    const dependenciesToOverride = (yield Promise.filter(
+    const dependenciesToOverride = (await Promise.filter(
       Object.keys(this.defaultDependencies),
       this.checkForBranchOnDependency.bind(this)
     ))
@@ -122,7 +122,7 @@ class DependencyManager {
 
     // Install dependencies
     console.log('Installing dependencies:')
-    yield spawn('npm', ['install'], {stdio: 'inherit'})
+    await spawn('npm', ['install'], {stdio: 'inherit'})
 
     // Avoid that old versions of modules listed in this.defaultDependencies are used instead of the latest version
     // see https://github.com/interledgerjs/five-bells-integration-test/pull/58#issuecomment-274904951
