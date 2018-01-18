@@ -7,7 +7,6 @@ const spawn = require('child-process-promise').spawn
 const packageJson = require(path.resolve(process.cwd(), 'package.json'))
 const loaderConfig = packageJson.config['five-bells-integration-test-loader']
 
-const Promise = require('bluebird-co')
 const DependencyManager = require('../lib/dependency-manager').DependencyManager
 const defaultDeps = { [loaderConfig.module]: loaderConfig.repo }
 if (loaderConfig.module === 'five-bells-integration-test') {
@@ -15,13 +14,13 @@ if (loaderConfig.module === 'five-bells-integration-test') {
 }
 const dependencies = new DependencyManager({ defaultDependencies: defaultDeps })
 
-Promise.coroutine(function * () {
+;(async function () {
   for (const module in dependencies.defaultDependencies) {
     if (module !== dependencies.getHostModuleName()) {
-      const isBranch = yield dependencies.checkForBranchOnDependency(module)
+      const isBranch = await dependencies.checkForBranchOnDependency(module)
       const branch = isBranch ? dependencies.getBranchNameUnderTest() : 'master'
       const repo = dependencies.defaultDependencies[module]
-      yield spawn('npm', ['install', repo + '#' + branch], { stdio: 'inherit' })
+      await spawn('npm', ['install', repo + '#' + branch], { stdio: 'inherit' })
     }
   }
-})().done()
+})()
