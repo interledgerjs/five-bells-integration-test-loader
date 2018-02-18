@@ -15,12 +15,14 @@ if (loaderConfig.module === 'five-bells-integration-test') {
 const dependencies = new DependencyManager({ defaultDependencies: defaultDeps })
 
 ;(async function () {
+  const params = ['install']
   for (const module in dependencies.defaultDependencies) {
     if (module !== dependencies.getHostModuleName()) {
       const isBranch = await dependencies.checkForBranchOnDependency(module)
       const branch = isBranch ? dependencies.getBranchNameUnderTest() : 'master'
       const repo = dependencies.defaultDependencies[module]
-      await spawn('npm', ['install', repo + '#' + branch], { stdio: 'inherit' })
+      params.push(repo + '#' + branch)
     }
   }
+  await spawn('npm', params, { stdio: 'inherit' })
 })()
