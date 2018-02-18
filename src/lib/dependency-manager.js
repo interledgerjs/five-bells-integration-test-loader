@@ -77,7 +77,7 @@ class DependencyManager {
       name: 'five-bells-integration-test-instance',
       private: true,
       dependencies: Object.assign(
-        {'sqlite3': '~3.1.0'},
+        {'memdown': '~2.0.0'},
         this.defaultDependencies,
         dependencyOverrides
       )
