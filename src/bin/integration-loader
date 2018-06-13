@@ -15,7 +15,7 @@ if (loaderConfig.module === 'five-bells-integration-test') {
 const dependencies = new DependencyManager({ defaultDependencies: defaultDeps })
 
 ;(async function () {
-  const params = ['install']
+  const params = ['install', '--no-save']
   for (const module in dependencies.defaultDependencies) {
     if (module !== dependencies.getHostModuleName()) {
       const isBranch = await dependencies.checkForBranchOnDependency(module)
