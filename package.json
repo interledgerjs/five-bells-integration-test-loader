@@ -31,17 +31,15 @@
   },
   "homepage": "https://github.com/interledgerjs/five-bells-integration-test-loader#readme",
   "devDependencies": {
-    "eslint": "^3.9.1",
-    "eslint-config-standard": "^6.2.1",
-    "eslint-plugin-promise": "^3.3.1",
-    "eslint-plugin-standard": "^2.0.1"
+    "eslint": "^5.4.0",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-promise": "^4.0.0",
+    "eslint-plugin-standard": "^3.1.0"
   },
   "dependencies": {
-    "bluebird": "^3.4.6",
-    "child-process-promise": "^2.2.0",
-    "git-branch": "^0.3.0",
-    "node-fetch": "^1.6.3",
-    "rimraf": "^2.5.4"
+    "child-process-promise": "^2.2.1",
+    "git-branch": "^2.0.1",
+    "node-fetch": "^2.2.0"
   },
   "config": {
     "five-bells-integration-test-loader": {
